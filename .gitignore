@@ -3,5 +3,7 @@ obj/
 *.cbp
 *.layout
 *.depend
+*.exe
+*.o
 
 

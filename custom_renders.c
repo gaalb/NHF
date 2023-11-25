@@ -432,7 +432,7 @@ void render_leaderboard(GameData* game_data, SDL_Color color1, SDL_Color color2)
     SDL_Renderer* renderer = game_data->renderer;
     boxRGBA(renderer, left, top, right, bottom, color2.r, color2.g, color2.b, 255);
     rectangleRGBA(renderer, left, top, right, bottom, color1.r, color1.g, color1.b, 255);
-    SDL_Rect rect = render_string_blended("Leaderboard:", color1, font, left, top, renderer, TopLeft);
+    SDL_Rect rect = render_string_blended("Ranglista:", color1, font, left, top, renderer, TopLeft);
     hlineRGBA(renderer, left, right, game_data->margo+60, color1.r, color1.g, color1.b, 255);
     top += rect.h + game_data->margo;
     int h = (bottom - top) / LEADERBOARD_SIZE;
@@ -520,7 +520,7 @@ void render_players(GameData* game_data, SDL_Color color1, SDL_Color color2) {
     SDL_Renderer* renderer = game_data->renderer;
     boxRGBA(renderer, left, top, right, bottom, color2.r, color2.g, color2.b, 255);
     rectangleRGBA(renderer, left, top, right, bottom, color1.r, color1.g, color1.b, 255);
-    SDL_Rect rect = render_string_blended("Players:", color1, font, left, top, renderer, TopLeft);
+    SDL_Rect rect = render_string_blended("Játékosok:", color1, font, left, top, renderer, TopLeft);
     top += rect.h + game_data->margo;
     int h = (bottom - top) / 8;
     for (int i=0; i<5; i++) {
@@ -546,7 +546,7 @@ void render_settings(GameData* game_data, SDL_Color color1, SDL_Color color2) {
     SDL_Renderer* renderer = game_data->renderer;
     boxRGBA(renderer, left, top, right, bottom, color2.r, color2.g, color2.b, 255);
     rectangleRGBA(renderer, left, top, right, bottom, color1.r, color1.g, color1.b, 255);
-    SDL_Rect rect = render_string_blended("Settings:", color1, font, left, top, renderer, TopLeft);
+    SDL_Rect rect = render_string_blended("Beállítások:", color1, font, left, top, renderer, TopLeft);
     hlineRGBA(renderer, left, right, game_data->margo+60, color1.r, color1.g, color1.b, 255);
     top += rect.h + game_data->margo;
     int h = (bottom-top) / LEADERBOARD_SIZE; //esztétkailag ez a szép, habár nincs köze a ranglistához

@@ -209,7 +209,7 @@ Bot bots[]: a botok tömbje (hossza makróként van megadva:BOT_NUM)
 void init_bots(Bot bots[]) {
     for (int i=0; i<BOT_NUM; i++) {
         Car car = {0, 0, 0, 0, {255, 255, 255}, {0, 0, 0}, ""};
-        sprintf(car.name, "BOT%d", i+1);
+        sprintf(car.name, "Bot%d", i+1);
         bots[i].expected_wpm = 30 + i*5;
         bots[i].ms = (int)(60000/(bots[i].expected_wpm+(rand()%10)-5));
         bots[i].tick = TICK_SEC+i+1;
@@ -435,8 +435,8 @@ void run_game(GameData* game_data, Text text, SDL_Rect* word_rects, int btn_W, i
     }
     //az UI elrendezés
     SDL_Rect input_box = {game_data->margo, input_top, game_data->szeles-2*game_data->margo, game_data->margo};
-    Button menu_button = {{game_data->szeles-btn_W-2*game_data->margo, btn_top, btn_W, btn_H}, feher, fekete, "Menu", go_to_menu};
-    Button settings_button = {{2*game_data->margo, btn_top, btn_W, btn_H}, feher, fekete, "Settings", go_to_settings};
+    Button menu_button = {{game_data->szeles-btn_W-2*game_data->margo, btn_top, btn_W, btn_H}, feher, fekete, "Menü", go_to_menu};
+    Button settings_button = {{2*game_data->margo, btn_top, btn_W, btn_H}, feher, fekete, "Beállítások", go_to_settings};
     const int num_buttons = 2; //csak 2 gomb: menübe lépés, és beállításokba lépés
     Button buttons[2] = {menu_button, settings_button};
     //az írogatáshoz használt segédváltozók
@@ -751,7 +751,7 @@ void run_multi_game(GameData* game_data) {
         clear_screen(game_data, vilagos_kek);
         char display_str[2*HOSSZ];
         //prompt, hogy írjanak be neveket:
-        sprintf(display_str, "Enter 2+ player names! ESC for Menu.");
+        sprintf(display_str, "Adja meg a neveket! ESC: visszalépés");
         render_string_blended(display_str, fekete, font, game_data->szeles/4, game_data->magas/2-2*game_data->margo, renderer, Middle);
         render_players(game_data, fekete, szurke);
         SDL_RenderPresent(renderer);
@@ -847,7 +847,7 @@ void run_multi_game(GameData* game_data) {
         }
         clear_screen(game_data, vilagos_kek);
         char display_str[2*HOSSZ];
-        sprintf(display_str, "WPM: %.2f. Accuracy: %.2f%%. Press any key to continue.", game_data->stats.wpm, game_data->stats.accuracy*100);
+        sprintf(display_str, "WPM: %.2f. Pontosság: %.2f%%. Nyomjon egy gombot a továbblépéshez.", game_data->stats.wpm, game_data->stats.accuracy*100);
         render_string_blended(display_str, fekete, font, game_data->szeles/2, game_data->magas/2, renderer, Middle);
         SDL_RenderPresent(renderer);
         //várjunk egy gombnyomásra, hogy az előző és következő játékos helyet cserélhessenek a székben
@@ -894,10 +894,10 @@ void main_menu(GameData* game_data) {
     SDL_Color vilagos_kek = {120, 150, 255};
     SDL_Color piros = {220, 50, 50};
     //az alábbi gombokra lesz szükség:
-    Button settings_button = {{game_data->szeles/2-W/2, 90, W, H}, feher, fekete, "Settings & Leaderboard", go_to_settings};
-    Button single_game_button = {{game_data->szeles/2-W/2, settings_button.rect.y+H+30, W, H}, feher, fekete, "Practice", go_to_single_game};
-    Button bot_game_button = {{game_data->szeles/2-W/2, single_game_button.rect.y+H+30, W, H}, feher, fekete, "Play vs Bots", go_to_bot_game};
-    Button multi_game_button = {{game_data->szeles/2-W/2, bot_game_button.rect.y+H+30, W, H}, feher, fekete, "Multiplayer", go_to_multi_game};
+    Button settings_button = {{game_data->szeles/2-W/2, 90, W, H}, feher, fekete, "Ranglista & Beállítások", go_to_settings};
+    Button single_game_button = {{game_data->szeles/2-W/2, settings_button.rect.y+H+30, W, H}, feher, fekete, "Játék egyedül", go_to_single_game};
+    Button bot_game_button = {{game_data->szeles/2-W/2, single_game_button.rect.y+H+30, W, H}, feher, fekete, "Játék botok ellen", go_to_bot_game};
+    Button multi_game_button = {{game_data->szeles/2-W/2, bot_game_button.rect.y+H+30, W, H}, feher, fekete, "Többszemélyes játék", go_to_multi_game};
     Button buttons[4] = {settings_button, single_game_button, bot_game_button, multi_game_button};
     bool quit = false;
     bool draw = true;
@@ -950,7 +950,7 @@ void settings(GameData* game_data) {
     SDL_Color szurke = {195, 195, 195};
     //az alábbi gombokra lesz szükség:
     const int num_buttons = 10;
-    Button menu_button = {{game_data->szeles*0.4-160, game_data->margo, 160, 60}, feher, fekete, "Menu", go_to_menu};
+    Button menu_button = {{game_data->szeles*0.4-160, game_data->margo, 160, 60}, feher, fekete, "Menü", go_to_menu};
     Button reset_leader_button = {{game_data->szeles - game_data->margo-160, game_data->margo, 160, 60}, feher, fekete, "Reset", reset_leaderboard};
     Button bot1_up_btn = {{game_data->szeles*0.4-40, 118, 40, 40}, feher, fekete, "+", bot1_up};
     Button bot2_up_btn = {{game_data->szeles*0.4-40, 162, 40, 40}, feher, fekete, "+", bot2_up};
@@ -1014,10 +1014,10 @@ void multi_statistics(GameData* game_data) {
     char display_str[2*HOSSZ];
     //mire ide jutunk, a game_data->multis már rendezve van WPM szerint csökkeő sorrendbe, csak ki kell írni őket
     for (int i=0; i<game_data->players; i++) {
-        sprintf(display_str, "%d.: %s, WPM: %.2f. ", i+1, game_data->multis[i].car.name, game_data->multis[i].expected_wpm);
+        sprintf(display_str, "%d.: %s, WPM: %.2f.", i+1, game_data->multis[i].car.name, game_data->multis[i].expected_wpm);
         //ha ranglistát érdemel a WPM, akkor ennek a tényét jelezzük és frissítsük a ranglistát
         if (top10(game_data->leaderboard, game_data->multis[i].expected_wpm)) {
-            strcat(display_str, "Earned a Leaderboard spot!");
+            strcat(display_str, " Ranglistás eredmény!");
             LeaderboardEntry entry;
             entry.wpm = game_data->multis[i].expected_wpm;
             strcpy(entry.name, game_data->multis[i].car.name);
@@ -1026,8 +1026,8 @@ void multi_statistics(GameData* game_data) {
         render_string_blended(display_str, fekete, font, game_data->szeles/2, game_data->margo*(i+2), renderer, Middle);
     }
     //az alábbi gombokra lesz szükség:
-    Button menu_button = {{game_data->szeles/2-100, game_data->magas-150, 200, 100}, feher, fekete, "Menu", go_to_menu};
-    Button settings_button = {{menu_button.rect.x, menu_button.rect.y - menu_button.rect.h-game_data->margo, menu_button.rect.w, menu_button.rect.h}, feher, fekete, "Settings", go_to_settings};
+    Button menu_button = {{game_data->szeles/2-100, game_data->magas-150, 200, 100}, feher, fekete, "Menü", go_to_menu};
+    Button settings_button = {{menu_button.rect.x, menu_button.rect.y - menu_button.rect.h-game_data->margo, menu_button.rect.w, menu_button.rect.h}, feher, fekete, "Beállítások", go_to_settings};
     Button buttons[2] = {menu_button, settings_button};
     for (int i=0; i<2; i++) {
         render_button(buttons[i], renderer, font);
@@ -1070,16 +1070,16 @@ void statistics(GameData* game_data) {
     SDL_Color feher = {255, 255, 255};
     SDL_Color vilagos_kek = {120, 150, 255};
     char display_str[2*HOSSZ];
-    sprintf(display_str, "WPM: %.2f. Accuracy: %.2f%%.", stats.wpm, stats.accuracy*100);
+    sprintf(display_str, "WPM: %.2f. Pontosság: %.2f%%.", stats.wpm, stats.accuracy*100);
     //erre a két gombra lesz szükség
-    Button menu_button = {{game_data->szeles/2-100, game_data->magas-150, 200, 100}, feher, fekete, "Menu", go_to_menu};
-    Button settings_button = {{menu_button.rect.x, menu_button.rect.y - menu_button.rect.h-game_data->margo, menu_button.rect.w, menu_button.rect.h}, feher, fekete, "Settings", go_to_settings};
+    Button menu_button = {{game_data->szeles/2-100, game_data->magas-150, 200, 100}, feher, fekete, "Menü", go_to_menu};
+    Button settings_button = {{menu_button.rect.x, menu_button.rect.y - menu_button.rect.h-game_data->margo, menu_button.rect.w, menu_button.rect.h}, feher, fekete, "Beállítások", go_to_settings};
     /*A settings_button alapesetben a beállításokhoz visz, de ha ranglistás lett az eredmény, akkor ehelyett
     nevet lehet vele rögzíteni, amivel a ranglistára felkerül a játékos*/
     if (top10(leaderboard, stats.wpm)) {
-        settings_button.str = "Enter Name";
+        settings_button.str = "Név Rögzítés";
         settings_button.func = get_name;
-        strcat(display_str, " Eligible for Leaderboard!");
+        strcat(display_str, " Ranglistás eredmény!");
     }
     clear_screen(game_data, vilagos_kek);
     Button buttons[2] = {menu_button, settings_button};
@@ -1125,7 +1125,7 @@ void ask_name(GameData* game_data) {
     clear_screen(game_data, vilagos_kek);
     char display_str[2*HOSSZ];
     //prompt
-    sprintf(display_str, "WPM: %.2f, enter name!", game_data->stats.wpm);
+    sprintf(display_str, "WPM: %.2f, adja meg a nevét!", game_data->stats.wpm);
     render_string_blended(display_str, fekete, font, game_data->szeles/2, game_data->magas/2-2*game_data->margo, renderer, Middle);
     SDL_RenderPresent(renderer);
     SDL_Rect input_box = {game_data->margo, game_data->magas/2, game_data->szeles-2*game_data->margo, game_data->margo};

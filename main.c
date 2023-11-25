@@ -128,7 +128,7 @@ int main(int argc, char *argv[]) {
     }
     sdl_init(szeles, magas, FONT, &window, &renderer, &font, &underlined, &title);
     TextArray textarray = parse_file("hobbit_long.txt"); //töltsük be a fájlt, amiből generáljuk a szövegeket
-    Car player_car = {0, 0, 0, 0, {255, 0, 0, 0}, {0, 0, 0}, "You"}; // a játékos kocsija mindig piros
+    Car player_car = {0, 0, 0, 0, {255, 0, 0, 0}, {0, 0, 0}, "You "}; // a játékos kocsija mindig piros
     GameView game_view = MainMenu;
     /*
     game_data fogja tartalmazni az összes olyan változót, amire bármely játéknézetnek szüksége lehet,

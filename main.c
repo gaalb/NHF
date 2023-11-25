@@ -126,8 +126,12 @@ int main(int argc, char *argv[]) {
         perror("Nem sikerult megnyitni a ranglistat.");
         return 0;
     }
-    sdl_init(szeles, magas, FONT, &window, &renderer, &font, &underlined, &title);
     TextArray textarray = parse_file("hobbit_long.txt"); //töltsük be a fájlt, amiből generáljuk a szövegeket
+    if (textarray.texts == NULL) {
+        perror("Nem sikerult beolvasni a textarray-t.");
+        return 0;
+    }
+    sdl_init(szeles, magas, FONT, &window, &renderer, &font, &underlined, &title);
     Car player_car = {0, 0, 0, 0, {255, 0, 0, 0}, {0, 0, 0}, "You "}; // a játékos kocsija mindig piros
     GameView game_view = MainMenu;
     /*

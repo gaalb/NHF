@@ -47,7 +47,7 @@ bool save_leaderboard(LeaderBoard leaderboard) {
 }
 
 /*
-Beilleszt egy 'entry'-t a ranglistába, a megfelelõ helyre. Ha az
+Beilleszt egy 'entry'-t a ranglistába, a megfelelő helyre. Ha az
 entry-nek nincs helye a ranglistán, nem csinál semmit.
 Leaderboard* leaderboard: a ranglista pointere, amit módosítunk
 LeaderboardEntry entry: a beszúrandó elem

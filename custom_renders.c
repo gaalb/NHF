@@ -218,7 +218,8 @@ Text text: a szöveget tartalmazó struktúra
 TTF_Font* font: a betűtípus
 Visszatérés: SDL_Rect változók dinamikusan foglalt tömbjére mutató pointer
 a szövegdoboz magassága abból dõl el, hány sorba fog kiférni a szöveg
-Megj.: a foglalt területet fel kell szabadítani*/
+Megj.: a foglalt területet fel kell szabadítani
+*/
 SDL_Rect* calculate_Rects(Text text, TTF_Font* font, int x, int y, int w) {
     SDL_Color color = {0, 0, 0};
     int word_count = text.word_count;

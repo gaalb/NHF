@@ -231,7 +231,7 @@ bool in_rect(SDL_Rect rect, int x, int y) {
 }
 
 /*
-az alábbi függvények mind a következõt teszik:
+az alábbi függvények mind a következőt teszik:
 -megváltoztatják a játéknézetet
 -kiraknak egy eventet, ami jelzi ennek a tényét
 paraméterük:

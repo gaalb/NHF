@@ -1,4 +1,5 @@
-3
+4
+87.33 CDE
 83.52 ABC
 61.20 Gyors Gépelő
 57.24 Hack Elek
